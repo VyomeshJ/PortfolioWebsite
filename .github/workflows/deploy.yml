@@ -1,0 +1,21 @@
+name: Deploy Portfolio
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Deploy on server
+        working-directory: /home/vjam/portfolio/PortfolioWebsite
+        run: |
+          git fetch origin
+          git reset --hard origin/main
+          npm ci
+          npm run build
+          pm2 restart portfolio-website || pm2 start npm --name portfolio-website -- run start
+          pm2 save
