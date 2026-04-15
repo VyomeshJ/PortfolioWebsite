@@ -76,9 +76,9 @@ export default function Two({index, onFocus}: MyProjectsProps){
     }, [])
     return(
         <div ref={ref} style={{opacity}} className="flex flex-col items-center justify-center min-h-screen px-8 gap-0 transition-opacity duration-200">
-            <h1 className="font-mc text-7xl md:text-8xl text-center">My Projects</h1>
+            <h1 className="font-mc text-7xl md:text-8xl text-center md:mb-20">My Projects</h1>
 
-            <div className="block md:hidden w-full flex justify-center gap-6 mt-6 relative z-20">
+            <div className="block md:hidden w-full flex justify-center gap-6 relative z-20">
                 <button
                     type="button"
                     onClick={goPrev}
@@ -116,7 +116,7 @@ export default function Two({index, onFocus}: MyProjectsProps){
                         transform: `translateX(-${currentIndex * 100}%)`,
                     }}
                     >
-                        <div className="w-full shrink-0 p-8 rounded-2xl flex flex-row items-center gap-20 justify-between">
+                        <div className="w-full h-full shrink-0 rounded-2xl flex flex-row items-center gap-20 justify-between">
                             <div className="max-w-[100%] md:max-w-[50%]">
                                 <h3 className="text-4xl md:text-5xl font-semibold">
                                     <a
@@ -142,7 +142,7 @@ export default function Two({index, onFocus}: MyProjectsProps){
                                 <Image src="/images/NoLoginShare.gif" alt="NoLoginShareImage" width={500} height={500} className="image-pixelated"/>
                             </div>
                         </div>
-                        <div className="w-full shrink-0 p-8 rounded-2xl flex flex-row items-center gap-20 justify-between">
+                        <div className="w-full h-full shrink-0 p-8 rounded-2xl flex flex-row items-center gap-20 justify-between">
                             <div className="max-w-[100%] md:max-w-[50%]">
                                 <h3 className="text-4xl md:text-5xl font-semibold">
                                         Homelab
@@ -162,7 +162,7 @@ export default function Two({index, onFocus}: MyProjectsProps){
                                 <Image src="/images/HomeServer.png" alt="Homelab" width={500} height={500} className="image-pixelated" unoptimized/>
                             </div>
                         </div>
-                        <div className="w-full shrink-0 p-8 rounded-2xl flex flex-row items-center gap-20 justify-between">
+                        <div className="w-full h-full shrink-0 p-8 rounded-2xl flex flex-row items-center gap-20 justify-between">
                             <div className="max-w-[100%] md:max-w-[50%]">
                                 <h3 className="text-4xl md:text-5xl font-semibold">
                                     <a
@@ -191,7 +191,7 @@ export default function Two({index, onFocus}: MyProjectsProps){
                     </div>
                 </div>
 
-                <div className="hidden w-full md:flex justify-center gap-6 mt-6 relative z-20">
+                <div className="hidden w-full md:flex justify-center gap-6 relative z-20">
                     <button
                         type="button"
                         onClick={goPrev}
