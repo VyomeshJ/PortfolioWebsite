@@ -36,7 +36,7 @@ export default function Two({index, onFocus}: MyProjectsProps){
         const mediaQuery = window.matchMedia('(max-width: 768px)')
         const handleScroll = () => {
             if (!ref.current) return
-            
+
             if (mediaQuery.matches) {
                 setOpacity(1)
                 onFocus(index)
@@ -77,6 +77,36 @@ export default function Two({index, onFocus}: MyProjectsProps){
     return(
         <div ref={ref} style={{opacity}} className="flex flex-col items-center justify-center min-h-screen px-8 gap-0 transition-opacity duration-200">
             <h1 className="font-mc text-7xl md:text-8xl text-center">My Projects</h1>
+
+            <div className="block md:hidden w-full flex justify-center gap-6 mt-6 relative z-20">
+                <button
+                    type="button"
+                    onClick={goPrev}
+                    className="p-2 touch-manipulation"
+                >
+                    <Image
+                    src="/images/MCArrow.png"
+                    alt="Previous project"
+                    width={80}
+                    height={80}
+                    className="image-pixelated rotate-225 brightness-70 active:brightness-100"
+                    />
+                </button>
+
+                <button
+                    type="button"
+                    onClick={goNext}
+                    className="p-2 touch-manipulation"
+                >
+                    <Image
+                    src="/images/MCArrow.png"
+                    alt="Next project"
+                    width={80}
+                    height={80}
+                    className="image-pixelated rotate-45 brightness-70 active:brightness-100"
+                    />
+                </button>
+            </div>
             
             <div className="relative w-full max-w-6xl mx-auto">
                 <div className="overflow-hidden">
@@ -161,7 +191,7 @@ export default function Two({index, onFocus}: MyProjectsProps){
                     </div>
                 </div>
 
-                <div className="w-full flex justify-center gap-6 mt-6 relative z-20">
+                <div className="hidden md:block w-full flex justify-center gap-6 mt-6 relative z-20">
                     <button
                         type="button"
                         onClick={goPrev}
