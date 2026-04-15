@@ -15,8 +15,15 @@ export default function Hero({ index, onFocus, viewProjectsClicked }: HeroProps)
     const [isFocused, setIsFocused] = useState(false)
 
     useEffect(() => {
+        const mediaQuery = window.matchMedia('(max-width: 768px)')
         const handleScroll = () => {
             if (!ref.current) return
+
+            if (mediaQuery.matches) {
+                setOpacity(1)
+                onFocus(index)
+                return
+            }
 
             const rect = ref.current.getBoundingClientRect()
             const windowHeight = window.innerHeight
@@ -50,13 +57,13 @@ export default function Hero({ index, onFocus, viewProjectsClicked }: HeroProps)
     }, [])
 
     return(
-        <div ref={ref} style={{opacity}} className="flex flex-col items-center justify-center min-h-[100svh] px-8 gap-12 transition-opacity duration-200">
+        <div ref={ref} style={{opacity}} className="flex flex-col items-center justify-center min-h-[100vh] px-8 gap-12 transition-opacity duration-200">
             <h1 className="font-mc text-7xl md:text-8xl text-center">Vyomesh Jamwal</h1>
             <div className="flex flex-row flex-wrap gap-4 justify-center">
-                <button className="font-mc text-3xl opacity-70 text-center hover:underline hover:opacity-100 shake-pixel" onClick={viewProjectsClicked}>[view projects]</button>
-                <button className="font-mc text-3xl opacity-70 text-center hover:underline hover:opacity-100 shake-pixel" onClick={() => {window.open('https://github.com/VyomeshJ', '_blank')}}>[github]</button>
-                <button className="font-mc text-3xl opacity-70 text-center hover:underline hover:opacity-100 shake-pixel" onClick={() => {window.open('https://vyomesh-jamwal.itch.io/', '_blank')}}>[itch.io]</button>
-                <button className="font-mc text-3xl opacity-70 text-center hover:underline hover:opacity-100 shake-pixel" onClick={() => {window.open('/Vyomesh_Jamwal_Resume.pdf', '_blank')}}>[resume]</button>
+                <button className="font-mc text-3xl opacity-70 text-center hover:underline hover:opacity-100 md:shake-pixel" onClick={viewProjectsClicked}>[view projects]</button>
+                <button className="font-mc text-3xl opacity-70 text-center hover:underline hover:opacity-100 md:shake-pixel" onClick={() => {window.open('https://github.com/VyomeshJ', '_blank')}}>[github]</button>
+                <button className="font-mc text-3xl opacity-70 text-center hover:underline hover:opacity-100 md:shake-pixel" onClick={() => {window.open('https://vyomesh-jamwal.itch.io/', '_blank')}}>[itch.io]</button>
+                <button className="font-mc text-3xl opacity-70 text-center hover:underline hover:opacity-100 md:shake-pixel" onClick={() => {window.open('/Vyomesh_Jamwal_Resume.pdf', '_blank')}}>[resume]</button>
             </div>
             
             <div className='select-none pointer-events-none flex flex-col items-center justify-between updown'>

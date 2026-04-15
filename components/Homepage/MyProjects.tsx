@@ -68,7 +68,7 @@ export default function Two({index, onFocus}: MyProjectsProps){
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
     return(
-        <div ref={ref} style={{opacity}} className="flex flex-col items-center justify-center min-h-screen px-8 gap-12 transition-opacity duration-200">
+        <div ref={ref} style={{opacity}} className="flex flex-col items-center justify-center min-h-screen px-8 gap-0 transition-opacity duration-200">
             <h1 className="font-mc text-7xl md:text-8xl text-center">My Projects</h1>
             
             <div className="relative w-full max-w-6xl mx-auto">
@@ -86,7 +86,7 @@ export default function Two({index, onFocus}: MyProjectsProps){
                                         href="https://nologinshare.vyomeshj.com/"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="hover:underline"
+                                        className="underline"
                                     >
                                         NoLoginShare
                                     </a>
@@ -107,17 +107,17 @@ export default function Two({index, onFocus}: MyProjectsProps){
                         </div>
                         <div className="w-full shrink-0 p-8 rounded-2xl flex flex-row items-center gap-20 justify-between">
                             <div className="max-w-[100%] md:max-w-[50%]">
-                                <h3 className="text-5xl font-semibold">
+                                <h3 className="text-4xl md:text-5xl font-semibold">
                                         Homelab
                                 </h3>
                                 <h3 className="text-2xl font-semibold mt-4 brightness-70">
-                                    An Ubuntu server running private and public applications 
+                                    An Ubuntu server running services
                                 </h3>
                                 <ul className="ml-4 mt-12 text-xl space-y-5">
-                                    <li>- Exposing services using Cloudflare Tunnels (public) and Tailscale VPN (private)</li>
-                                    <li>- Self-hosted Strapi CMS for the <a href="https://www.uoagdg.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">UOAGDG Website</a></li>
+                                    <li>- Exposing services using Cloudflare Tunnels and Tailscale</li>
+                                    <li>- Self-hosted Strapi CMS for the <a href="https://www.uoagdg.com/" target="_blank" rel="noopener noreferrer" className="underline">UOAGDG Website</a></li>
                                     <li>- Setup a media server with Jellyfin and the arr stack</li>
-                                    <li>- Utilized NextCloud for free cloud storage and Immich for Photo Backups</li>
+                                    <li>- Running instances of NextCloud and Immich</li>
                                     <li>- Managing all docker deployments with Portainer</li>
                                 </ul>
                             </div>
@@ -127,12 +127,12 @@ export default function Two({index, onFocus}: MyProjectsProps){
                         </div>
                         <div className="w-full shrink-0 p-8 rounded-2xl flex flex-row items-center gap-20 justify-between">
                             <div className="max-w-[100%] md:max-w-[50%]">
-                                <h3 className="text-5xl font-semibold">
+                                <h3 className="text-4xl md:text-5xl font-semibold">
                                     <a
                                         href="https://vyomesh-jamwal.itch.io/"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="hover:underline"
+                                        className="underline"
                                     >
                                         Game Dev
                                     </a>
@@ -142,8 +142,8 @@ export default function Two({index, onFocus}: MyProjectsProps){
                                 </h3>
                                 <ul className="ml-4 mt-12 text-xl space-y-5">
                                     <li>- Developed on Unity for 4+ years and 2+ years in Godot</li>
-                                    <li>- President of the Game Developer Guild at UoA and Created the <a href="https://www.uoagdg.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">UOAGDG Website</a></li>
-                                    <li>- Most notibly worked on the game "Awake in Fear" for two years with another developer, working mostly on the trigger and story saving aspects</li>
+                                    <li>- President of the Game Developer Guild at UoA and Created the <a href="https://www.uoagdg.com/" target="_blank" rel="noopener noreferrer" className="underline">UOAGDG Website</a></li>
+                                    <li>- Co-developed "Awake in Fear" over two years</li>
                                 </ul>
                             </div>
                              <div className='hidden md:block'>
