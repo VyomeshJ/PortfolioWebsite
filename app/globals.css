@@ -10,12 +10,47 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-mc: var(--font-mcfont)
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+  }
+}
+
+.image-pixelated {
+  image-rendering: pixelated;
+}
+.shake-pixel {
+  animation: none;
+}
+.shake-pixel:hover {
+  animation: shakePixel 0.3s steps(2) infinite;
+}
+
+@keyframes shakePixel {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-2px, 1px); }
+  50%  { transform: translate(2px, -1px); }
+  75%  { transform: translate(-1px, -2px); }
+  100% { transform: translate(0, 0); }
+}
+
+.updown {
+  opacity: 0.4;
+  animation: updownani 1s steps(2, end) infinite;
+}
+@keyframes updownani {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+  100% {
+    transform: translateY(0px);
   }
 }
 
