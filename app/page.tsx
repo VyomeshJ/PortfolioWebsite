@@ -17,6 +17,11 @@ export default function Home() {
 
   return (
     <div className="font-mc">
+      <div className='relative z-50'>
+        <div className="fixed top-0 left-0 flex items-center justify-center w-30 h-30">
+          <h1 className="font-mc text-2xl z-50">{focusedSection + 1}/5</h1>
+        </div>
+      </div>
       <div className="fixed inset-0 z-0 pointer-events-none">
         <MinecraftScene />
       </div>
