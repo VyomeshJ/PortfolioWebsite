@@ -191,7 +191,7 @@ export default function Two({index, onFocus}: MyProjectsProps){
                     </div>
                 </div>
 
-                <div className="hidden md:block w-full flex justify-center gap-6 mt-6 relative z-20">
+                <div className="hidden w-full md:flex justify-center gap-6 mt-6 relative z-20">
                     <button
                         type="button"
                         onClick={goPrev}
