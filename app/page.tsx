@@ -48,7 +48,7 @@ export default function Home() {
           
           />
         </div>
-        <div ref={TwoRef}>
+        <div>
           <Contact
           index={2}
           onFocus={setFocusedSection}
