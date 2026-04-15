@@ -33,8 +33,15 @@ export default function Two({index, onFocus}: MyProjectsProps){
     // }, [])
 
     useEffect(() => {
+        const mediaQuery = window.matchMedia('(max-width: 768px)')
         const handleScroll = () => {
             if (!ref.current) return
+            
+            if (mediaQuery.matches) {
+                setOpacity(1)
+                onFocus(index)
+                return
+            }
 
             const rect = ref.current.getBoundingClientRect()
             const windowHeight = window.innerHeight
