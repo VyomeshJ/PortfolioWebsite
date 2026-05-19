@@ -1,9 +1,35 @@
 'use client'
 
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { useGLTF, Center, Environment, Scroll } from '@react-three/drei'
+import { useGLTF, Center, Environment, Html, useProgress } from '@react-three/drei'
 import { Suspense, useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
+
+
+function Loader() {
+  const { progress } = useProgress()
+
+  return (
+    <Html center>
+      <div className="rounded-xl bg-black/70 px-6 py-4 text-center text-white backdrop-blur-md">
+        <div className="mb-3 text-lg font-semibold">
+          Loading world...
+        </div>
+
+        <div className="h-2 w-64 overflow-hidden rounded-full bg-white/20">
+          <div
+            className="h-full bg-white transition-all duration-300"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+
+        <div className="mt-2 text-sm text-white/80">
+          {progress.toFixed(0)}%
+        </div>
+      </div>
+    </Html>
+  )
+}
 
 function MinecraftWorld() {
   const { scene } = useGLTF('/models/skyblock_spawn_mineville.glb')
@@ -143,10 +169,10 @@ function ScrollCamera() {
         position: new THREE.Vector3(-2.7837, -3.5564, 1.8576),
         lookAt: new THREE.Vector3(13.9462, -0.1727, 12.2815),
       },
-      // {
-      //   position: new THREE.Vector3(-3.6276, -3.8112, 1.2864),
-      //   lookAt: new THREE.Vector3(13.8336, 0.3187, 10.1207),
-      // },
+      {
+        position: new THREE.Vector3(-3.6276, -3.8112, 1.2864),
+        lookAt: new THREE.Vector3(13.8336, 0.3187, 10.1207),
+      },
       
       {
         position: new THREE.Vector3(-1.0611, -4.1969, -1.2603),
@@ -242,13 +268,12 @@ export default function SceneBackground() {
         <ambientLight intensity={1.5} />
         <directionalLight position={[50, 80, 30]} intensity={2} />
 
-        <Suspense fallback={null}>
+        <Suspense fallback={<Loader />}>
           <MinecraftWorld />
           <Environment preset="sunset" />
         </Suspense>
         <ScrollCamera />
-        {/* <FlyCamera />
-        <CameraDebugger /> */}
+        
       </Canvas>
     </div>
   )

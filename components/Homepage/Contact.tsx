@@ -17,12 +17,6 @@ export default function Contact({ index, onFocus }: ContactProps) {
     const handleScroll = () => {
       if (!ref.current) return
 
-      if (mediaQuery.matches) {
-        setOpacity(1)
-        onFocus(index)
-        return
-      }
-
       const rect = ref.current.getBoundingClientRect()
       const windowHeight = window.innerHeight
 
@@ -39,6 +33,11 @@ export default function Contact({ index, onFocus }: ContactProps) {
 
       if (distance < 80) {
         onFocus(index)
+        return
+      }
+
+      if (mediaQuery.matches && distance < windowHeight * 0.4) {
+        onFocus(index)
       }
     }
 
@@ -46,13 +45,13 @@ export default function Contact({ index, onFocus }: ContactProps) {
     handleScroll()
 
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [index, onFocus])
 
   return (
     <div
       ref={ref}
       style={{ opacity }}
-      className="flex flex-col items-center justify-center min-h-screen px-8 transition-opacity duration-200"
+      className="flex flex-col items-center justify-center min-h-screen px-8 transition-opacity duration-75 ease-out"
     >
       <h1 className="font-mc text-7xl md:text-8xl text-center mb-16">
         Contact

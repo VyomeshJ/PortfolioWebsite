@@ -1,6 +1,5 @@
 'use client'
 
-import Image from "next/image";
 import { useState, useRef } from 'react'
 import MinecraftScene from '@/components/Scene';
 import Hero from '@/components/Homepage/Hero';
@@ -18,9 +17,9 @@ export default function Home() {
 
   return (
     <div className="font-mc">
-      <div className='hidden md:block relative z-50'>
-        <div className="fixed top-0 left-0 flex items-center justify-center w-30 h-30">
-          <h1 className="font-mc text-2xl z-50">{focusedSection + 1}/3</h1>
+      <div className="pointer-events-none fixed left-3 top-3 z-50 md:left-4 md:top-4">
+        <div className="flex h-10 min-w-14 items-center justify-center rounded-sm border border-white/15 bg-black/35 px-3 backdrop-blur-sm md:h-12 md:min-w-16">
+          <h1 className="font-mc text-base md:text-xl">{focusedSection + 1}/5</h1>
         </div>
       </div>
       <div className="fixed inset-0 z-0 pointer-events-none">
@@ -50,7 +49,7 @@ export default function Home() {
         </div>
         <div>
           <Contact
-          index={2}
+          index={4}
           onFocus={setFocusedSection}
           />
         </div>

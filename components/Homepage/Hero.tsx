@@ -12,18 +12,11 @@ type HeroProps = {
 export default function Hero({ index, onFocus, viewProjectsClicked }: HeroProps){
     const ref = useRef<HTMLDivElement | null>(null)
     const [opacity, setOpacity] = useState(1)
-    const [isFocused, setIsFocused] = useState(false)
 
     useEffect(() => {
         const mediaQuery = window.matchMedia('(max-width: 768px)')
         const handleScroll = () => {
             if (!ref.current) return
-
-            if (mediaQuery.matches) {
-                setOpacity(1)
-                onFocus(index)
-                return
-            }
 
             const rect = ref.current.getBoundingClientRect()
             const windowHeight = window.innerHeight
@@ -43,9 +36,13 @@ export default function Hero({ index, onFocus, viewProjectsClicked }: HeroProps)
             setOpacity(newOpacity)
 
             const focused = distance < 80
-            setIsFocused(focused)
 
             if (focused) {
+                onFocus(index)
+                return
+            }
+
+            if (mediaQuery.matches && distance < windowHeight * 0.4) {
                 onFocus(index)
             }
         }
@@ -54,10 +51,10 @@ export default function Hero({ index, onFocus, viewProjectsClicked }: HeroProps)
         handleScroll()
 
         return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
+    }, [index, onFocus])
 
     return(
-        <div ref={ref} style={{opacity}} className="flex flex-col items-center justify-center min-h-[100vh] px-8 gap-12 transition-opacity duration-200">
+        <div ref={ref} style={{opacity}} className="flex flex-col items-center justify-center min-h-[100vh] px-8 gap-12 transition-opacity duration-75 ease-out">
             <h1 className="font-mc text-7xl md:text-8xl text-center">Vyomesh Jamwal</h1>
             <div className="flex flex-row flex-wrap gap-4 justify-center">
                 <button className="font-mc text-3xl opacity-70 text-center hover:underline hover:opacity-100 md:shake-pixel" onClick={viewProjectsClicked}>[view projects]</button>
