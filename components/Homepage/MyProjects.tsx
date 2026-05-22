@@ -66,7 +66,7 @@ const projects: Project[] = [
     points: [
       'Developed on Unity for 4+ years and 2+ years in Godot',
       <>
-        President of the Game Developer Guild at UoA and Created the{' '}
+        President of the Game Developer Guild at University of Auckland and Created the{' '}
         <a
           href="https://www.uoagdg.com/"
           target="_blank"

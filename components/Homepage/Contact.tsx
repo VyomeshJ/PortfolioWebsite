@@ -59,7 +59,7 @@ export default function Contact({ index, onFocus }: ContactProps) {
 
       <div className="flex flex-col gap-10 text-2xl md:text-3xl text-center">
         
-        {/* Email */}
+        
         <a
           href="mailto:vyomesh.jamwal@gmail.com"
           className="underline hover:brightness-75 transition"
@@ -67,7 +67,7 @@ export default function Contact({ index, onFocus }: ContactProps) {
           vyomesh.jamwal@gmail.com
         </a>
 
-        {/* Phone */}
+        
         <a
           href="tel:+64225141423"
           className="underline hover:brightness-75 transition"
