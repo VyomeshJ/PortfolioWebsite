@@ -154,7 +154,7 @@ function ProjectPanel({
       )}
 
       <article
-        className={`flex w-full max-w-7xl flex-col justify-around gap-4 rounded-md border border-white/15 bg-black/25 p-4 backdrop-blur-sm sm:gap-5 sm:p-5 md:gap-6 md:p-8 lg:min-h-[68svh] lg:flex-row lg:items-stretch lg:justify-between lg:gap-16 ${
+        className={`flex w-full max-w-7xl flex-col justify-between gap-4 overflow-hidden rounded-md border border-white/15 bg-black/25 p-4 backdrop-blur-sm sm:gap-5 sm:p-5 md:gap-6 md:p-8 lg:min-h-[68svh] lg:flex-row lg:items-stretch lg:justify-between lg:gap-16 ${
           showHeading ? 'h-[calc(80svh-4rem)] sm:h-[calc(80svh-4.5rem)] lg:h-auto' : 'h-[80svh] lg:h-auto'
         }`}
       >
@@ -183,13 +183,13 @@ function ProjectPanel({
           </ul>
         </div>
 
-        <div className="flex h-[clamp(10rem,24svh,14rem)] w-full shrink-0 items-center justify-center lg:h-auto lg:w-[48%] lg:flex-1">
+        <div className="flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden max-h-[clamp(8rem,22svh,12rem)] lg:max-h-none lg:h-auto lg:w-[48%] lg:flex-1">
           <Image
             src={project.image}
             alt={project.imageAlt}
             width={500}
             height={500}
-            className="image-pixelated h-full w-full object-contain lg:max-h-none"
+            className="image-pixelated h-full max-h-full w-full max-w-full object-contain"
             unoptimized={project.unoptimized}
           />
         </div>
