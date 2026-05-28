@@ -145,17 +145,21 @@ function ProjectPanel({
     <section
       ref={ref}
       style={{ opacity }}
-      className="flex min-h-[100svh] flex-col items-center justify-center gap-6 px-4 py-8 transition-opacity duration-75 ease-out sm:gap-8 sm:px-6 sm:py-12 md:gap-10 md:px-8"
+      className="flex min-h-[100svh] snap-center flex-col items-center justify-center gap-4 px-4 py-6 transition-opacity duration-75 ease-out sm:gap-6 sm:px-6 sm:py-8 md:snap-always md:gap-10 md:px-8 md:py-12"
     >
       {showHeading && (
-        <h1 className="font-mc text-center text-5xl sm:text-7xl md:text-8xl">
+        <h1 className="font-mc text-center text-4xl sm:text-5xl md:text-8xl">
           My Projects
         </h1>
       )}
 
-      <article className="flex min-h-[72svh] w-full max-w-7xl flex-col justify-center gap-6 rounded-md border border-white/15 bg-black/25 p-5 backdrop-blur-sm sm:gap-9 sm:p-8 lg:min-h-[68svh] lg:flex-row lg:items-stretch lg:justify-between lg:gap-16">
-        <div className="max-w-3xl lg:flex lg:max-w-[52%] lg:flex-col lg:justify-center">
-          <h3 className="font-mc text-3xl sm:text-5xl md:text-6xl">
+      <article
+        className={`flex w-full max-w-7xl flex-col justify-around gap-4 rounded-md border border-white/15 bg-black/25 p-4 backdrop-blur-sm sm:gap-5 sm:p-5 md:gap-6 md:p-8 lg:min-h-[68svh] lg:flex-row lg:items-stretch lg:justify-between lg:gap-16 ${
+          showHeading ? 'h-[calc(80svh-4rem)] sm:h-[calc(80svh-4.5rem)] lg:h-auto' : 'h-[80svh] lg:h-auto'
+        }`}
+      >
+        <div className="shrink-0 max-w-3xl lg:flex lg:max-w-[52%] lg:flex-col lg:justify-center">
+          <h3 className="font-mc text-2xl sm:text-3xl md:text-6xl">
             {project.href ? (
               <a
                 href={project.href}
@@ -169,17 +173,17 @@ function ProjectPanel({
               project.title
             )}
           </h3>
-          <h3 className="mt-4 font-pixel text-2xl font-medium leading-tight brightness-70 sm:text-4xl">
+          <h3 className="mt-3 font-pixel text-xl font-medium leading-snug brightness-70 sm:text-2xl md:mt-4 md:text-4xl md:leading-tight">
             {project.description}
           </h3>
-          <ul className="mt-7 space-y-4 text-base leading-relaxed sm:ml-4 sm:mt-12 sm:space-y-5 sm:text-2xl">
+          <ul className="mt-5 space-y-3 text-base leading-relaxed sm:ml-2 sm:mt-7 sm:space-y-3 sm:text-lg md:ml-4 md:mt-12 md:space-y-5 md:text-2xl">
             {project.points.map((point, pointIndex) => (
               <li key={pointIndex}>- {point}</li>
             ))}
           </ul>
         </div>
 
-        <div className="flex h-[clamp(11rem,28svh,18rem)] w-full items-center justify-center sm:h-[clamp(16rem,34svh,24rem)] lg:h-auto lg:w-[48%] lg:flex-1">
+        <div className="flex h-[clamp(10rem,24svh,14rem)] w-full shrink-0 items-center justify-center lg:h-auto lg:w-[48%] lg:flex-1">
           <Image
             src={project.image}
             alt={project.imageAlt}

@@ -51,7 +51,7 @@ export default function Contact({ index, onFocus }: ContactProps) {
     <div
       ref={ref}
       style={{ opacity }}
-      className="flex flex-col items-center justify-center min-h-screen px-8 transition-opacity duration-75 ease-out"
+      className="flex flex-col items-center justify-center min-h-screen snap-start snap-always px-8 transition-opacity duration-75 ease-out"
     >
       <h1 className="font-mc text-7xl md:text-8xl text-center mb-16">
         Contact
