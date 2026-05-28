@@ -41,7 +41,7 @@ function LoadingScreen() {
           />
         </div>
 
-        <p className="mt-4 font-mc text-xl text-white/80">{displayProgress}%</p>
+        <p className="mt-4 text-xl text-white/80">{displayProgress}%</p>
       </div>
     </div>
   )
@@ -57,7 +57,7 @@ export default function Home() {
   }
 
   return (
-    <div className="font-mc">
+    <div>
       <LoadingScreen />
       <div className="pointer-events-none fixed left-3 top-3 z-50 md:left-4 md:top-4">
         <div className="flex h-10 min-w-14 items-center justify-center rounded-sm border border-white/15 bg-black/35 px-3 backdrop-blur-sm md:h-12 md:min-w-16">

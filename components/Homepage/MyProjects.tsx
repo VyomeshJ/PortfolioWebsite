@@ -155,7 +155,7 @@ function ProjectPanel({
 
       <article className="flex min-h-[72svh] w-full max-w-7xl flex-col justify-center gap-6 rounded-md border border-white/15 bg-black/25 p-5 backdrop-blur-sm sm:gap-9 sm:p-8 lg:min-h-[68svh] lg:flex-row lg:items-stretch lg:justify-between lg:gap-16">
         <div className="max-w-3xl lg:flex lg:max-w-[52%] lg:flex-col lg:justify-center">
-          <h3 className="text-3xl font-semibold sm:text-5xl md:text-6xl">
+          <h3 className="font-mc text-3xl sm:text-5xl md:text-6xl">
             {project.href ? (
               <a
                 href={project.href}
@@ -169,7 +169,7 @@ function ProjectPanel({
               project.title
             )}
           </h3>
-          <h3 className="mt-4 text-xl font-semibold brightness-70 sm:text-3xl">
+          <h3 className="mt-4 font-pixel text-2xl font-medium leading-tight brightness-70 sm:text-4xl">
             {project.description}
           </h3>
           <ul className="mt-7 space-y-4 text-base leading-relaxed sm:ml-4 sm:mt-12 sm:space-y-5 sm:text-2xl">
