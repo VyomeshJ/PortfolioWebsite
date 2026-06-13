@@ -38,12 +38,22 @@ jobs:
             --tag "${CONTAINER_NAME}:latest" \
             .
 
-          if command -v pm2 >/dev/null 2>&1; then
-            pm2 delete "$CONTAINER_NAME" || true
-            pm2 save || true
+          if command -v pm2 >/dev/null 2>&1 \
+            && pm2 describe "$CONTAINER_NAME" > /dev/null 2>&1; then
+            pm2 delete "$CONTAINER_NAME"
+            pm2 save --force
           fi
 
+          docker ps --quiet --filter "publish=${HOST_PORT}" \
+            | xargs --no-run-if-empty docker rm --force
           docker rm --force "$CONTAINER_NAME" 2>/dev/null || true
+
+          if command -v fuser >/dev/null 2>&1 \
+            && fuser "${HOST_PORT}/tcp" > /dev/null 2>&1; then
+            fuser --kill "${HOST_PORT}/tcp"
+            sleep 1
+          fi
+
           docker run --detach \
             --name "$CONTAINER_NAME" \
             --restart unless-stopped \
