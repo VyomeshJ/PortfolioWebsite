@@ -59,7 +59,7 @@ export default function Home() {
   return (
     <div>
       <LoadingScreen />
-      <div className="pointer-events-none fixed left-3 top-3 z-50 md:left-4 md:top-4">
+      <div className="pointer-events-none fixed left-3 top-3 z-50 origin-top-left scale-75 md:left-4 md:top-4">
         <div className="flex h-10 min-w-14 items-center justify-center rounded-sm border border-white/15 bg-black/35 px-3 backdrop-blur-sm md:h-12 md:min-w-16">
           <h1 className="font-mc text-base md:text-xl">{focusedSection + 1}/5</h1>
         </div>

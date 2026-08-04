@@ -145,55 +145,57 @@ function ProjectPanel({
     <section
       ref={ref}
       style={{ opacity }}
-      className="flex min-h-[100svh] snap-center flex-col items-center justify-center gap-4 px-4 py-6 transition-opacity duration-75 ease-out sm:gap-6 sm:px-6 sm:py-8 md:snap-always md:gap-10 md:px-8 md:py-12"
+      className="flex min-h-[100svh] snap-center items-center justify-center px-4 py-6 transition-opacity duration-75 ease-out sm:px-6 sm:py-8 md:snap-always md:px-8 md:py-12"
     >
-      {showHeading && (
-        <h1 className="font-mc text-center text-4xl sm:text-5xl md:text-8xl">
-          My Projects
-        </h1>
-      )}
+      <div className="flex w-full origin-center scale-75 flex-col items-center justify-center gap-4 sm:gap-6 md:gap-10">
+        {showHeading && (
+          <h1 className="font-mc text-center text-4xl sm:text-5xl md:text-8xl">
+            My Projects
+          </h1>
+        )}
 
-      <article
-        className={`flex w-full max-w-7xl flex-col justify-between gap-4 overflow-hidden rounded-md border border-white/15 bg-black/25 p-4 backdrop-blur-sm sm:gap-5 sm:p-5 md:gap-6 md:p-8 lg:min-h-[68svh] lg:flex-row lg:items-stretch lg:justify-between lg:gap-16 ${
-          showHeading ? 'h-[calc(80svh-4rem)] sm:h-[calc(80svh-4.5rem)] lg:h-auto' : 'h-[80svh] lg:h-auto'
-        }`}
-      >
-        <div className="shrink-0 max-w-3xl lg:flex lg:max-w-[52%] lg:flex-col lg:justify-center">
-          <h3 className="font-mc text-2xl sm:text-3xl md:text-6xl">
-            {project.href ? (
-              <a
-                href={project.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline"
-              >
-                {project.title}
-              </a>
-            ) : (
-              project.title
-            )}
-          </h3>
-          <h3 className="mt-3 font-pixel text-xl font-medium leading-snug brightness-70 sm:text-2xl md:mt-4 md:text-4xl md:leading-tight">
-            {project.description}
-          </h3>
-          <ul className="mt-5 space-y-3 text-base leading-relaxed sm:ml-2 sm:mt-7 sm:space-y-3 sm:text-lg md:ml-4 md:mt-12 md:space-y-5 md:text-2xl">
-            {project.points.map((point, pointIndex) => (
-              <li key={pointIndex}>- {point}</li>
-            ))}
-          </ul>
-        </div>
+        <article
+          className={`flex w-full max-w-7xl flex-col justify-between gap-4 overflow-hidden rounded-md border border-white/15 bg-black/25 p-4 backdrop-blur-sm sm:gap-5 sm:p-5 md:gap-6 md:p-8 lg:min-h-[68svh] lg:flex-row lg:items-stretch lg:justify-between lg:gap-16 ${
+            showHeading ? 'h-[calc(80svh-4rem)] sm:h-[calc(80svh-4.5rem)] lg:h-auto' : 'h-[80svh] lg:h-auto'
+          }`}
+        >
+          <div className="shrink-0 max-w-3xl lg:flex lg:max-w-[52%] lg:flex-col lg:justify-center">
+            <h3 className="font-mc text-2xl sm:text-3xl md:text-6xl">
+              {project.href ? (
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline"
+                >
+                  {project.title}
+                </a>
+              ) : (
+                project.title
+              )}
+            </h3>
+            <h3 className="mt-3 font-pixel text-xl font-medium leading-snug brightness-70 sm:text-2xl md:mt-4 md:text-4xl md:leading-tight">
+              {project.description}
+            </h3>
+            <ul className="mt-5 space-y-3 text-base leading-relaxed sm:ml-2 sm:mt-7 sm:space-y-3 sm:text-lg md:ml-4 md:mt-12 md:space-y-5 md:text-2xl">
+              {project.points.map((point, pointIndex) => (
+                <li key={pointIndex}>- {point}</li>
+              ))}
+            </ul>
+          </div>
 
-        <div className="flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden max-h-[clamp(8rem,22svh,12rem)] lg:max-h-none lg:h-auto lg:w-[48%] lg:flex-1">
-          <Image
-            src={project.image}
-            alt={project.imageAlt}
-            width={500}
-            height={500}
-            className="image-pixelated h-full max-h-full w-full max-w-full object-contain"
-            unoptimized={project.unoptimized}
-          />
-        </div>
-      </article>
+          <div className="flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden max-h-[clamp(8rem,22svh,12rem)] lg:max-h-none lg:h-auto lg:w-[48%] lg:flex-1">
+            <Image
+              src={project.image}
+              alt={project.imageAlt}
+              width={500}
+              height={500}
+              className="image-pixelated h-full max-h-full w-full max-w-full object-contain"
+              unoptimized={project.unoptimized}
+            />
+          </div>
+        </article>
+      </div>
     </section>
   )
 }

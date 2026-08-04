@@ -54,21 +54,23 @@ export default function Hero({ index, onFocus, viewProjectsClicked }: HeroProps)
     }, [index, onFocus])
 
     return(
-        <div ref={ref} style={{opacity}} className="flex flex-col items-center justify-center min-h-[100vh] snap-start snap-always px-8 gap-12 transition-opacity duration-75 ease-out">
-            <h1 className="font-mc text-7xl md:text-8xl text-center">Vyomesh Jamwal</h1>
-            <div className="flex flex-row flex-wrap gap-4 justify-center">
-                <button className="text-3xl opacity-70 text-center hover:underline hover:opacity-100 md:shake-pixel" onClick={viewProjectsClicked}>[view projects]</button>
-                <button className="text-3xl opacity-70 text-center hover:underline hover:opacity-100 md:shake-pixel" onClick={() => {window.open('https://github.com/VyomeshJ', '_blank')}}>[github]</button>
-                <button className="text-3xl opacity-70 text-center hover:underline hover:opacity-100 md:shake-pixel" onClick={() => {window.open('https://vyomesh-jamwal.itch.io/', '_blank')}}>[itch.io]</button>
-                <button className="text-3xl opacity-70 text-center hover:underline hover:opacity-100 md:shake-pixel" onClick={() => {window.open('/Vyomesh_Jamwal_Resume.pdf', '_blank')}}>[resume]</button>
-            </div>
-            
-            <div className='select-none pointer-events-none flex flex-col items-center justify-between updown'>
-                <p className="text-3xl text-center">
-                    scroll down
-                    
-                </p>
-                <Image src="/images/arrow_down.png" alt="down_arrow" width={30} height={30} className="image-pixelated"/>
+        <div ref={ref} style={{opacity}} className="flex min-h-[100vh] snap-start snap-always items-center justify-center px-8 transition-opacity duration-75 ease-out">
+            <div className="flex origin-center scale-75 flex-col items-center justify-center gap-12">
+                <h1 className="font-mc text-7xl md:text-8xl text-center">Vyomesh Jamwal</h1>
+                <div className="flex flex-row flex-wrap gap-4 justify-center">
+                    <button className="text-3xl opacity-70 text-center hover:underline hover:opacity-100 md:shake-pixel" onClick={viewProjectsClicked}>[view projects]</button>
+                    <button className="text-3xl opacity-70 text-center hover:underline hover:opacity-100 md:shake-pixel" onClick={() => {window.open('https://github.com/VyomeshJ', '_blank')}}>[github]</button>
+                    <button className="text-3xl opacity-70 text-center hover:underline hover:opacity-100 md:shake-pixel" onClick={() => {window.open('https://vyomesh-jamwal.itch.io/', '_blank')}}>[itch.io]</button>
+                    <button className="text-3xl opacity-70 text-center hover:underline hover:opacity-100 md:shake-pixel" onClick={() => {window.open('/Vyomesh_Jamwal_Resume.pdf', '_blank')}}>[resume]</button>
+                </div>
+
+                <div className='select-none pointer-events-none flex flex-col items-center justify-between updown'>
+                    <p className="text-3xl text-center">
+                        scroll down
+
+                    </p>
+                    <Image src="/images/arrow_down.png" alt="down_arrow" width={30} height={30} className="image-pixelated"/>
+                </div>
             </div>
         </div>
             

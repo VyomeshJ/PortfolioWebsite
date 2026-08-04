@@ -51,30 +51,28 @@ export default function Contact({ index, onFocus }: ContactProps) {
     <div
       ref={ref}
       style={{ opacity }}
-      className="flex flex-col items-center justify-center min-h-screen snap-start snap-always px-8 transition-opacity duration-75 ease-out"
+      className="flex min-h-screen snap-start snap-always items-center justify-center px-8 transition-opacity duration-75 ease-out"
     >
-      <h1 className="font-mc text-7xl md:text-8xl text-center mb-16">
-        Contact
-      </h1>
+      <div className="flex origin-center scale-75 flex-col items-center justify-center">
+        <h1 className="font-mc text-7xl md:text-8xl text-center mb-16">
+          Contact
+        </h1>
 
-      <div className="flex flex-col gap-10 text-2xl md:text-3xl text-center">
-        
-        
-        <a
-          href="mailto:vyomesh.jamwal@gmail.com"
-          className="underline hover:brightness-75 transition"
-        >
-          vyomesh.jamwal@gmail.com
-        </a>
+        <div className="flex flex-col gap-10 text-2xl md:text-3xl text-center">
+          <a
+            href="mailto:vyomesh.jamwal@gmail.com"
+            className="underline hover:brightness-75 transition"
+          >
+            vyomesh.jamwal@gmail.com
+          </a>
 
-        
-        <a
-          href="tel:+64225141423"
-          className="underline hover:brightness-75 transition"
-        >
-          +64 0225141423
-        </a>
-
+          <a
+            href="tel:+64225141423"
+            className="underline hover:brightness-75 transition"
+          >
+            +64 0225141423
+          </a>
+        </div>
       </div>
     </div>
   )
