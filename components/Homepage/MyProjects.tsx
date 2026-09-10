@@ -132,7 +132,7 @@ function ProjectPanel({
             </ul>
           </div>
 
-          <div className="flex min-h-0 w-full items-center justify-center overflow-hidden rounded-sm bg-white/[0.03] p-3 sm:p-5 lg:h-full">
+          <div className="flex min-h-0 w-full items-center justify-center overflow-hidden p-3 sm:p-5 lg:h-full">
             <Image
               src={project.image}
               alt={project.imageAlt}
