@@ -40,7 +40,7 @@ const projects: Project[] = [
       <span key="strapi">
         Self-hosted Strapi CMS for the{' '}
         <a
-          href="https://www.uoagdg.com/"
+          href="https://uoagdg.com/"
           target="_blank"
           rel="noopener noreferrer"
           className="underline underline-offset-2"
@@ -66,7 +66,7 @@ const projects: Project[] = [
       <span key="guild">
         President of the Game Developer Guild at University of Auckland and Created the{' '}
         <a
-          href="https://www.uoagdg.com/"
+          href="https://uoagdg.com/"
           target="_blank"
           rel="noopener noreferrer"
           className="underline underline-offset-2"
