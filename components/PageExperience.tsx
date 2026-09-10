@@ -1,7 +1,14 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useCallback, useEffect, useState } from 'react'
+import {
+  Component,
+  type ErrorInfo,
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 
 const MinecraftScene = dynamic(() => import('@/components/Scene'), {
   ssr: false,
@@ -11,6 +18,26 @@ type NavigatorWithConnection = Navigator & {
   connection?: {
     effectiveType?: string
     saveData?: boolean
+  }
+}
+
+class SceneErrorBoundary extends Component<
+  { children: ReactNode; onError: (error: Error) => void },
+  { failed: boolean }
+> {
+  state = { failed: false }
+
+  static getDerivedStateFromError() {
+    return { failed: true }
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error('The 3D background was disabled after an error.', error, errorInfo)
+    this.props.onError(error)
+  }
+
+  render() {
+    return this.state.failed ? null : this.props.children
   }
 }
 
@@ -76,6 +103,10 @@ export default function PageExperience({ sectionCount }: { sectionCount: number 
     // The content is already interactive; the scene fades in behind it when ready.
   }, [])
 
+  const handleSceneError = useCallback(() => {
+    setSceneMode(null)
+  }, [])
+
   const handleSceneProgress = useCallback((nextProgress: number) => {
     setProgress(Math.max(0, Math.min(100, Math.round(nextProgress))))
   }, [])
@@ -86,11 +117,14 @@ export default function PageExperience({ sectionCount }: { sectionCount: number 
 
       {sceneMode && (
         <div className="pointer-events-none fixed inset-0 z-[1]">
-          <MinecraftScene
-            lowPower={sceneMode === 'low'}
-            onProgress={handleSceneProgress}
-            onReady={handleSceneReady}
-          />
+          <SceneErrorBoundary onError={handleSceneError}>
+            <MinecraftScene
+              lowPower={sceneMode === 'low'}
+              onError={handleSceneError}
+              onProgress={handleSceneProgress}
+              onReady={handleSceneReady}
+            />
+          </SceneErrorBoundary>
         </div>
       )}
 

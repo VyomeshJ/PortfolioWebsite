@@ -6,6 +6,7 @@ import { Suspense, useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 
 type SceneCallbacks = {
+  onError: (error: Error) => void
   onProgress: (progress: number) => void
   onReady: () => void
 }
@@ -15,7 +16,7 @@ type SceneProps = SceneCallbacks & {
 }
 
 function MinecraftWorld() {
-  const { scene } = useGLTF('/models/skyblock_spawn_mineville.glb')
+  const { scene } = useGLTF('/models/skyblock_spawn_mineville-v2.glb')
 
   return (
     <Center>
@@ -24,7 +25,7 @@ function MinecraftWorld() {
   )
 }
 
-function SceneLifecycle({ onProgress, onReady }: SceneCallbacks) {
+function SceneLifecycle({ onProgress, onReady }: Omit<SceneCallbacks, 'onError'>) {
   const { active, progress } = useProgress()
   const hasStarted = useRef(false)
   const hasFinished = useRef(false)
@@ -43,6 +44,23 @@ function SceneLifecycle({ onProgress, onReady }: SceneCallbacks) {
       onReady()
     }
   }, [active, onProgress, onReady, progress])
+
+  return null
+}
+
+function WebGLContextGuard({ onError }: Pick<SceneCallbacks, 'onError'>) {
+  const { gl } = useThree()
+
+  useEffect(() => {
+    const canvas = gl.domElement
+    const handleContextLoss = (event: Event) => {
+      event.preventDefault()
+      onError(new Error('WebGL context lost'))
+    }
+
+    canvas.addEventListener('webglcontextlost', handleContextLoss, { once: true })
+    return () => canvas.removeEventListener('webglcontextlost', handleContextLoss)
+  }, [gl, onError])
 
   return null
 }
@@ -136,9 +154,9 @@ function ScrollCamera() {
   return null
 }
 
-export default function SceneBackground({ lowPower, onProgress, onReady }: SceneProps) {
+export default function SceneBackground({ lowPower, onError, onProgress, onReady }: SceneProps) {
   return (
-    <div className="fixed inset-0 z-0">
+    <div className="absolute inset-0 z-0">
       <Canvas
         camera={{
           position: [0.4776, -3.3887, -2.7458],
@@ -148,7 +166,7 @@ export default function SceneBackground({ lowPower, onProgress, onReady }: Scene
         }}
         dpr={lowPower ? 1 : [1, 1.5]}
         frameloop="demand"
-        gl={{ antialias: false, alpha: false, powerPreference: 'high-performance' }}
+        gl={{ antialias: false, alpha: true, powerPreference: 'high-performance' }}
         performance={{ min: 0.5 }}
       >
         <color attach="background" args={['#87ceeb']} />
@@ -158,6 +176,7 @@ export default function SceneBackground({ lowPower, onProgress, onReady }: Scene
         <Suspense fallback={null}>
           <MinecraftWorld />
         </Suspense>
+        <WebGLContextGuard onError={onError} />
         <SceneLifecycle onProgress={onProgress} onReady={onReady} />
         <ScrollCamera />
       </Canvas>
