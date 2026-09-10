@@ -16,7 +16,7 @@ type NavigatorWithConnection = Navigator & {
 
 export default function PageExperience({ sectionCount }: { sectionCount: number }) {
   const [focusedSection, setFocusedSection] = useState(0)
-  const [sceneEnabled, setSceneEnabled] = useState(false)
+  const [sceneMode, setSceneMode] = useState<'low' | 'full' | null>(null)
   const [sceneReady, setSceneReady] = useState(false)
   const [progress, setProgress] = useState(0)
   const [loaderMounted, setLoaderMounted] = useState(true)
@@ -44,30 +44,26 @@ export default function PageExperience({ sectionCount }: { sectionCount: number 
 
   useEffect(() => {
     const connection = (navigator as NavigatorWithConnection).connection
-    const hasConstrainedNetwork =
+    const isMobile = window.matchMedia('(max-width: 899px), (pointer: coarse)').matches
+    const isConstrained =
       connection?.saveData === true ||
       connection?.effectiveType === 'slow-2g' ||
       connection?.effectiveType === '2g'
-    const canRunImmersiveScene =
-      window.matchMedia('(min-width: 900px) and (pointer: fine)').matches &&
-      !window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
-      !hasConstrainedNetwork
 
-    setSceneEnabled(canRunImmersiveScene)
-
-    if (!canRunImmersiveScene) {
+    const showContent = window.setTimeout(() => {
       setProgress(100)
       setSceneReady(true)
+    }, 180)
+    const sceneTimeout = window.setTimeout(
+      () => setSceneMode(isMobile || isConstrained ? 'low' : 'full'),
+      isMobile || isConstrained ? 500 : 0
+    )
+
+    return () => {
+      window.clearTimeout(showContent)
+      window.clearTimeout(sceneTimeout)
     }
   }, [])
-
-  useEffect(() => {
-    if (!sceneEnabled || sceneReady) return
-
-    // Never trap the portfolio behind the loader if WebGL or the model fails.
-    const safetyTimeout = window.setTimeout(() => setSceneReady(true), 8000)
-    return () => window.clearTimeout(safetyTimeout)
-  }, [sceneEnabled, sceneReady])
 
   useEffect(() => {
     if (!sceneReady) return
@@ -77,8 +73,7 @@ export default function PageExperience({ sectionCount }: { sectionCount: number 
   }, [sceneReady])
 
   const handleSceneReady = useCallback(() => {
-    setProgress(100)
-    setSceneReady(true)
+    // The content is already interactive; the scene fades in behind it when ready.
   }, [])
 
   const handleSceneProgress = useCallback((nextProgress: number) => {
@@ -89,9 +84,10 @@ export default function PageExperience({ sectionCount }: { sectionCount: number 
     <>
       <div className="world-fallback fixed inset-0 z-0" aria-hidden="true" />
 
-      {sceneEnabled && (
-        <div className="pointer-events-none fixed inset-0 z-[1] hidden min-[900px]:block">
+      {sceneMode && (
+        <div className="pointer-events-none fixed inset-0 z-[1]">
           <MinecraftScene
+            lowPower={sceneMode === 'low'}
             onProgress={handleSceneProgress}
             onReady={handleSceneReady}
           />

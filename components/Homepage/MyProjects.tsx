@@ -16,28 +16,27 @@ const projects: Project[] = [
   {
     title: 'NoLoginShare',
     href: 'https://nologinshare.vyomeshj.com/',
-    description:
-      'Self-hosted, secure, no-login file sharing with encryption and automatic expiry.',
+    description: 'Self-hosted, Secure, no-login file sharing app with file encryption and auto-expiry',
     image: '/images/NoLoginShare.gif',
     imageAlt: 'NoLoginShare project preview',
     imageWidth: 179,
     imageHeight: 160,
     points: [
       'Next.js frontend and Express backend',
-      'SQLite metadata storage',
-      'Docker deployment on my homelab',
-      'Securely exposed with Cloudflare Tunnels',
+      'SQLite used to store metadata of files',
+      'Web app deployed on my homelab server containerized using Docker',
+      'Exposed the service using Cloudflare Tunnels',
     ],
   },
   {
     title: 'Homelab',
-    description: 'An Ubuntu server running the services I use and maintain.',
-    image: '/images/HomeServer.avif',
+    description: 'An Ubuntu server running services',
+    image: '/images/HomeServer.png',
     imageAlt: 'Homelab server preview',
     imageWidth: 153,
     imageHeight: 135,
     points: [
-      'Cloudflare Tunnels and Tailscale for secure access',
+      'Exposing services using Cloudflare Tunnels and Tailscale',
       <span key="strapi">
         Self-hosted Strapi CMS for the{' '}
         <a
@@ -46,33 +45,33 @@ const projects: Project[] = [
           rel="noopener noreferrer"
           className="underline underline-offset-2"
         >
-          UOAGDG website
+          UOAGDG Website
         </a>
       </span>,
-      'Jellyfin media server with the arr stack',
-      'Nextcloud, Immich, and Portainer deployments',
+      'Setup a media server with Jellyfin and the arr stack',
+      'Running instances of NextCloud and Immich',
+      'Managing all docker deployments with Portainer',
     ],
   },
   {
     title: 'Game Dev',
     href: 'https://vyomesh-jamwal.itch.io/',
-    description:
-      'Games ranging from compact jam projects to fully developed, long-term releases.',
-    image: '/images/GameDev.avif',
+    description: 'Designed and developed games ranging from small game jam projects to fully developed long-term projects',
+    image: '/images/GameDev.png',
     imageAlt: 'Game development project preview',
     imageWidth: 856,
     imageHeight: 706,
     points: [
-      '4+ years with Unity and 2+ years with Godot',
+      'Developed on Unity for 4+ years and 2+ years in Godot',
       <span key="guild">
-        President of the University of Auckland Game Developer Guild and creator of the{' '}
+        President of the Game Developer Guild at University of Auckland and Created the{' '}
         <a
           href="https://www.uoagdg.com/"
           target="_blank"
           rel="noopener noreferrer"
           className="underline underline-offset-2"
         >
-          UOAGDG website
+          UOAGDG Website
         </a>
       </span>,
       'Co-developed “Awake in Fear” over two years',

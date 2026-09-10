@@ -5,9 +5,13 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Suspense, useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 
-type SceneProps = {
+type SceneCallbacks = {
   onProgress: (progress: number) => void
   onReady: () => void
+}
+
+type SceneProps = SceneCallbacks & {
+  lowPower: boolean
 }
 
 function MinecraftWorld() {
@@ -20,7 +24,7 @@ function MinecraftWorld() {
   )
 }
 
-function SceneLifecycle({ onProgress, onReady }: SceneProps) {
+function SceneLifecycle({ onProgress, onReady }: SceneCallbacks) {
   const { active, progress } = useProgress()
   const hasStarted = useRef(false)
   const hasFinished = useRef(false)
@@ -44,7 +48,7 @@ function SceneLifecycle({ onProgress, onReady }: SceneProps) {
 }
 
 function ScrollCamera() {
-  const { camera } = useThree()
+  const { camera, invalidate } = useThree()
   const points = useMemo(
     () => [
       {
@@ -87,6 +91,7 @@ function ScrollCamera() {
         0,
         points.length - 1
       )
+      invalidate()
     }
 
     updateTarget()
@@ -97,7 +102,7 @@ function ScrollCamera() {
       window.removeEventListener('scroll', updateTarget)
       window.removeEventListener('resize', updateTarget)
     }
-  }, [points.length])
+  }, [invalidate, points.length])
 
   useFrame((_, delta) => {
     const alpha = 1 - Math.exp(-4 * delta)
@@ -124,12 +129,14 @@ function ScrollCamera() {
 
     camera.position.copy(cameraPosition.current)
     camera.lookAt(cameraTarget.current)
+
+    if (Math.abs(targetT.current - currentT.current) > 0.001) invalidate()
   })
 
   return null
 }
 
-export default function SceneBackground({ onProgress, onReady }: SceneProps) {
+export default function SceneBackground({ lowPower, onProgress, onReady }: SceneProps) {
   return (
     <div className="fixed inset-0 z-0">
       <Canvas
@@ -139,7 +146,8 @@ export default function SceneBackground({ onProgress, onReady }: SceneProps) {
           near: 0.1,
           far: 10000,
         }}
-        dpr={[1, 1.5]}
+        dpr={lowPower ? 1 : [1, 1.5]}
+        frameloop="demand"
         gl={{ antialias: false, alpha: false, powerPreference: 'high-performance' }}
         performance={{ min: 0.5 }}
       >

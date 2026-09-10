@@ -12,9 +12,6 @@ export default function Hero() {
     >
       <div className="flex w-full max-w-5xl flex-col items-center justify-center gap-8 text-center sm:gap-10 md:gap-12">
         <div>
-          <p className="mb-4 text-lg uppercase tracking-[0.2em] text-white/60 sm:text-xl">
-            Developer · Game maker · Homelab builder
-          </p>
           <h1 className="font-mc text-[clamp(2.7rem,14vw,6rem)] leading-[0.95] text-balance">
             Vyomesh Jamwal
           </h1>
