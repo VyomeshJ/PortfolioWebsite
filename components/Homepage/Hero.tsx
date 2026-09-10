@@ -1,78 +1,59 @@
-'use client'
-
-import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 
-type HeroProps = {
-  index: number
-  onFocus: (index: number) => void
-  viewProjectsClicked: () => void
-}
+const linkStyles =
+  'inline-flex min-h-11 items-center justify-center px-2 text-center text-xl opacity-75 transition hover:opacity-100 hover:underline focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:text-2xl md:shake-pixel md:text-3xl'
 
-export default function Hero({ index, onFocus, viewProjectsClicked }: HeroProps){
-    const ref = useRef<HTMLDivElement | null>(null)
-    const [opacity, setOpacity] = useState(1)
-
-    useEffect(() => {
-        const mediaQuery = window.matchMedia('(max-width: 768px)')
-        const handleScroll = () => {
-            if (!ref.current) return
-
-            const rect = ref.current.getBoundingClientRect()
-            const windowHeight = window.innerHeight
-
-            
-            const elementCenter = rect.top + rect.height / 2
-            const screenCenter = windowHeight / 2
-
-            const distance = Math.abs(screenCenter - elementCenter)
-
-
-            const maxDistance = windowHeight / 2
-            let newOpacity = 1 - (distance / maxDistance)*0.7
-
-            newOpacity = Math.max(0, Math.min(1, newOpacity))
-
-            setOpacity(newOpacity)
-
-            const focused = distance < 80
-
-            if (focused) {
-                onFocus(index)
-                return
-            }
-
-            if (mediaQuery.matches && distance < windowHeight * 0.4) {
-                onFocus(index)
-            }
-        }
-
-        window.addEventListener('scroll', handleScroll)
-        handleScroll()
-
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [index, onFocus])
-
-    return(
-        <div ref={ref} style={{opacity}} className="flex min-h-[100vh] snap-start snap-always items-center justify-center px-8 transition-opacity duration-75 ease-out">
-            <div className="flex origin-center scale-75 flex-col items-center justify-center gap-12">
-                <h1 className="font-mc text-7xl md:text-8xl text-center">Vyomesh Jamwal</h1>
-                <div className="flex flex-row flex-wrap gap-4 justify-center">
-                    <button className="text-3xl opacity-70 text-center hover:underline hover:opacity-100 md:shake-pixel" onClick={viewProjectsClicked}>[view projects]</button>
-                    <button className="text-3xl opacity-70 text-center hover:underline hover:opacity-100 md:shake-pixel" onClick={() => {window.open('https://github.com/VyomeshJ', '_blank')}}>[github]</button>
-                    <button className="text-3xl opacity-70 text-center hover:underline hover:opacity-100 md:shake-pixel" onClick={() => {window.open('https://vyomesh-jamwal.itch.io/', '_blank')}}>[itch.io]</button>
-                    <button className="text-3xl opacity-70 text-center hover:underline hover:opacity-100 md:shake-pixel" onClick={() => {window.open('/Vyomesh_Jamwal_Resume.pdf', '_blank')}}>[resume]</button>
-                </div>
-
-                <div className='select-none pointer-events-none flex flex-col items-center justify-between updown'>
-                    <p className="text-3xl text-center">
-                        scroll down
-
-                    </p>
-                    <Image src="/images/arrow_down.png" alt="down_arrow" width={30} height={30} className="image-pixelated"/>
-                </div>
-            </div>
+export default function Hero() {
+  return (
+    <section
+      id="home"
+      data-section-index="0"
+      className="flex min-h-[100svh] snap-start items-center justify-center px-5 pb-[max(2rem,env(safe-area-inset-bottom))] pt-[max(5rem,env(safe-area-inset-top))] sm:px-8"
+    >
+      <div className="flex w-full max-w-5xl flex-col items-center justify-center gap-8 text-center sm:gap-10 md:gap-12">
+        <div>
+          <p className="mb-4 text-lg uppercase tracking-[0.2em] text-white/60 sm:text-xl">
+            Developer · Game maker · Homelab builder
+          </p>
+          <h1 className="font-mc text-[clamp(2.7rem,14vw,6rem)] leading-[0.95] text-balance">
+            Vyomesh Jamwal
+          </h1>
         </div>
-            
-    )
+
+        <nav
+          aria-label="Portfolio links"
+          className="flex max-w-3xl flex-wrap justify-center gap-x-3 gap-y-1 sm:gap-x-5 sm:gap-y-2"
+        >
+          <a className={linkStyles} href="#projects">
+            [view projects]
+          </a>
+          <a className={linkStyles} href="https://github.com/VyomeshJ" target="_blank" rel="noopener noreferrer">
+            [github]
+          </a>
+          <a className={linkStyles} href="https://vyomesh-jamwal.itch.io/" target="_blank" rel="noopener noreferrer">
+            [itch.io]
+          </a>
+          <a className={linkStyles} href="/Vyomesh_Jamwal_Resume.pdf" target="_blank" rel="noopener noreferrer">
+            [resume]
+          </a>
+        </nav>
+
+        <a
+          href="#projects"
+          className="updown flex min-h-12 select-none flex-col items-center justify-center gap-1 text-xl opacity-50 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:text-2xl"
+          aria-label="Scroll to projects"
+        >
+          <span>scroll down</span>
+          <Image
+            src="/images/arrow_down.png"
+            alt=""
+            width={24}
+            height={24}
+            className="image-pixelated"
+            priority
+          />
+        </a>
+      </div>
+    </section>
+  )
 }

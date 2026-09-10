@@ -1,32 +1,27 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #050706;
   --foreground: #ededed;
+  color-scheme: dark;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-pixelify-sans);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-mc: var(--font-mcfont);
   --font-pixel: var(--font-pixelify-sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
+  background: var(--background);
+  -webkit-text-size-adjust: 100%;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 900px) and (min-height: 640px) and (pointer: fine) {
   html {
     scroll-snap-type: y mandatory;
   }
@@ -38,8 +33,11 @@ html {
 .shake-pixel {
   animation: none;
 }
-.shake-pixel:hover {
-  animation: shakePixel 0.3s steps(2) infinite;
+
+@media (hover: hover) and (pointer: fine) {
+  .shake-pixel:hover {
+    animation: shakePixel 0.3s steps(2) infinite;
+  }
 }
 
 @keyframes shakePixel {
@@ -69,5 +67,39 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-pixelify-sans), var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-pixelify-sans), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  touch-action: pan-y;
+}
+
+.world-fallback {
+  background:
+    radial-gradient(circle at 80% 12%, rgb(125 169 120 / 28%), transparent 32rem),
+    radial-gradient(circle at 12% 84%, rgb(76 123 109 / 22%), transparent 28rem),
+    linear-gradient(145deg, #17241e 0%, #101a18 45%, #080c0b 100%);
+}
+
+.page-shade {
+  background: rgb(0 0 0 / 62%);
+}
+
+@media (min-width: 900px) {
+  .page-shade {
+    background: rgb(0 0 0 / 80%);
+    backdrop-filter: blur(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

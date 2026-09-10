@@ -1,79 +1,34 @@
-'use client'
-
-import { useEffect, useRef, useState } from 'react'
-
-type ContactProps = {
-  index: number
-  onFocus: (index: number) => void
-}
-
-export default function Contact({ index, onFocus }: ContactProps) {
-  const ref = useRef<HTMLDivElement | null>(null)
-  const [opacity, setOpacity] = useState(1)
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 768px)')
-
-    const handleScroll = () => {
-      if (!ref.current) return
-
-      const rect = ref.current.getBoundingClientRect()
-      const windowHeight = window.innerHeight
-
-      const elementCenter = rect.top + rect.height / 2
-      const screenCenter = windowHeight / 2
-
-      const distance = Math.abs(screenCenter - elementCenter)
-      const maxDistance = windowHeight / 2
-
-      let newOpacity = 1 - distance / maxDistance
-      newOpacity = Math.max(0, Math.min(1, newOpacity))
-
-      setOpacity(newOpacity)
-
-      if (distance < 80) {
-        onFocus(index)
-        return
-      }
-
-      if (mediaQuery.matches && distance < windowHeight * 0.4) {
-        onFocus(index)
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    handleScroll()
-
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [index, onFocus])
-
+export default function Contact({ index }: { index: number }) {
   return (
-    <div
-      ref={ref}
-      style={{ opacity }}
-      className="flex min-h-screen snap-start snap-always items-center justify-center px-8 transition-opacity duration-75 ease-out"
+    <section
+      id="contact"
+      data-section-index={index}
+      className="flex min-h-[100svh] snap-start items-center justify-center px-5 py-20 sm:px-8"
     >
-      <div className="flex origin-center scale-75 flex-col items-center justify-center">
-        <h1 className="font-mc text-7xl md:text-8xl text-center mb-16">
+      <div className="flex w-full max-w-4xl flex-col items-center justify-center text-center">
+        <p className="mb-4 text-lg uppercase tracking-[0.2em] text-white/60">
+          Let&apos;s build something
+        </p>
+        <h1 className="font-mc text-[clamp(3rem,14vw,6rem)] leading-none">
           Contact
         </h1>
 
-        <div className="flex flex-col gap-10 text-2xl md:text-3xl text-center">
+        <div className="mt-12 flex w-full flex-col items-center gap-6 text-xl sm:mt-16 sm:text-2xl md:text-3xl">
           <a
             href="mailto:vyomesh.jamwal@gmail.com"
-            className="underline hover:brightness-75 transition"
+            className="min-h-11 max-w-full break-all underline decoration-white/40 underline-offset-4 transition hover:decoration-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
           >
             vyomesh.jamwal@gmail.com
           </a>
 
           <a
             href="tel:+64225141423"
-            className="underline hover:brightness-75 transition"
+            className="inline-flex min-h-11 items-center underline decoration-white/40 underline-offset-4 transition hover:decoration-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
           >
-            +64 0225141423
+            +64 22 514 1423
           </a>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
