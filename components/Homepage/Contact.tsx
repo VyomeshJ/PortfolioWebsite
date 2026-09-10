@@ -6,9 +6,6 @@ export default function Contact({ index }: { index: number }) {
       className="flex min-h-[100svh] snap-start items-center justify-center px-5 py-20 sm:px-8"
     >
       <div className="flex w-full max-w-4xl flex-col items-center justify-center text-center">
-        <p className="mb-4 text-lg uppercase tracking-[0.2em] text-white/60">
-          Let&apos;s build something
-        </p>
         <h1 className="font-mc text-[clamp(3rem,14vw,6rem)] leading-none">
           Contact
         </h1>
